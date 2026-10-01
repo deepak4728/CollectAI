@@ -1,0 +1,7 @@
+{
+  "name": "CollectAI - Universal AI Data Collection Engine",
+  "description": "Universal AI-driven data collection platform with deterministic validation, conversational intake, dynamic forms, and operator-assisted workflows.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

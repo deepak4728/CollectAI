@@ -1,0 +1,46 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile authenticated with Firebase Auth",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Auth UID" },
+        "email": { "type": "string", "description": "User email address" },
+        "displayName": { "type": "string", "description": "Display name" },
+        "photoURL": { "type": "string", "description": "Profile picture URL" },
+        "role": { "type": "string", "enum": ["admin", "operator", "customer"], "description": "User role" },
+        "createdAt": { "type": "string", "description": "Timestamp" }
+      },
+      "required": ["uid", "email"]
+    },
+    "SubmissionRecord": {
+      "title": "SubmissionRecord",
+      "description": "Collected intake record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique submission ID" },
+        "organizationId": { "type": "string", "description": "Tenant ID" },
+        "workflowId": { "type": "string", "description": "Associated workflow ID" },
+        "workflowName": { "type": "string", "description": "Name of workflow" },
+        "respondentName": { "type": "string", "description": "Customer/Citizen name" },
+        "submittedBy": { "type": "string", "description": "Actor who submitted" },
+        "userId": { "type": "string", "description": "Optional auth user ID" },
+        "status": { "type": "string", "enum": ["completed", "needs_review", "archived"] },
+        "structuredData": { "type": "object", "description": "Structured collected fields and values" },
+        "submittedAt": { "type": "string", "description": "Submission ISO timestamp" }
+      },
+      "required": ["id", "workflowId", "structuredData"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Stores user profiles with auth protection"
+    },
+    "/submissions/{submissionId}": {
+      "schema": { "$ref": "#/entities/SubmissionRecord" },
+      "description": "Stores submissions collected via voice, conversation, forms, and operator"
+    }
+  }
+}
